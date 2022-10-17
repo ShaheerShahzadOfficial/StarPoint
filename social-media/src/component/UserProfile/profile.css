@@ -1,0 +1,111 @@
+.loaderContainer{
+    background: rgb(12,235,235);
+background: linear-gradient(90deg, rgba(12,235,235,1) 0%, rgba(32,227,178,1) 50%, rgba(41,255,198,1) 100%);
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 2vmax;
+box-sizing: border-box;
+height: auto;
+min-height: 100vh;
+}
+
+.loader{
+    background-color: white;
+    /* height: 100%; */
+    width: 60%;
+    border-radius: 30px;
+    box-sizing: border-box;
+    padding: 2vmax;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.UserProfile{
+    width: 80%;
+    margin: auto;
+    border-radius: 30px;
+    height: auto;
+    background-color: white;
+}
+
+
+
+.ProfileContainer {
+    padding-top: 5.5vmax;
+    /* display: flex; */
+    /* width: 100vw; */
+    height: auto;
+    max-width: 100%;
+    /* position: fixed; */
+    background-color: white;
+    margin: auto;  
+}
+  
+  .ProfileContainer > div {
+    display: flex;
+    /* height: 50vh ; */
+    /* width: 40%; */
+    margin: auto;
+    /* max-width: 100%; */
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .Link > a{
+   width: 15vmax;
+   background-color: black;
+   text-align: center;
+   text-decoration: none;
+   color: rgba(0, 0, 0, 0.923);
+   color: whitesmoke;
+   margin: 1vmax;
+   margin-bottom: 0 !important;
+   padding: 1vmax;
+font-size: 1.4vmax;
+   display: inline-block;
+}
+.Details{
+    margin-top: 2vmax !important;
+    display: flex !important;
+    margin: auto;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: row !important;
+}
+.Details > div{
+    margin: 2vmax;
+    text-align: center;
+}
+.Details > div > p {
+text-align: start !important;
+}
+.logout{
+    display: flex;
+    flex-direction: row !important;
+}
+.logout > button{
+    margin: 1vmax;
+}
+
+@media screen and (max-width: 770px) {
+.ProfileContainer {
+    padding-top: 15vmax;
+    height: auto;
+    max-width: 100%;
+    background-color: white;
+    margin: auto;  
+}
+/* .Link > a{
+    width: 18vmax;
+     margin: 2vmax; 
+     padding: 2vmax;
+     font-size: 1.6vmax;
+
+ } */
+ /* .Link{
+    width: 110%;
+ } */
+}

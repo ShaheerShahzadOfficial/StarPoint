@@ -1,0 +1,185 @@
+.home {
+  /* background-color: white; */
+  align-items: center;
+  justify-content: center;
+  padding: 2vmax;
+  box-sizing: border-box;
+  /* background: linear-gradient(90deg, rgba(12,235,235,1) 0%, rgba(32,227,178,1) 50%, rgba(41,255,198,1) 100%); */
+height: auto;
+min-height: 100vh;
+}
+.noPost {
+  margin: auto;
+  text-align: center;
+  padding: 4vmax;
+  /* height: auto; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.noPost > svg {
+  font-size: 10vmax;
+  /* color: rgb(255, 0, 76); */
+  color: #155799;
+}
+.noPost > p {
+  font: 600 2vmax "Roboto";
+  padding: 3vmax 3vmax;
+  color: #155799;
+}
+.noPost > a {
+  background-color: rgb(51, 51, 51);
+  color: white;
+  border: none;
+  padding: 1vmax 3vmax;
+  cursor: pointer;
+  font: 600 1.5vmax "Roboto";
+  text-decoration: none;
+}
+.AddPost {
+  width: 50%;
+  box-shadow:0px 0px 2px 1px  rgb(0, 0, 0);   
+  height: 10vh;
+  margin-top: 6vmax !important;
+  margin: auto;
+  border-radius: 100px;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  
+}
+.AddPost > button {
+  box-sizing: border-box;
+  padding: 1vmax;
+  width: 90%;
+  border-radius: 40px;
+  border: 1px solid #ccc;
+  margin: 1vh;
+  text-align: start;
+  font: 100 1.2rem "Roboto", sans-serif;
+  outline: none;
+  background-color: transparent;
+}
+.PostContent {
+  box-sizing: border-box;
+  padding: 1vmax;
+  width: 90%;
+  border: none;
+  margin: 1vh;
+  text-align: start;
+  font: 100 1.2rem "Roboto", sans-serif;
+  outline: none;
+  background-color: transparent;
+}
+.CreatePost > h2 {
+  text-align: center;
+  color: rgb(56, 56, 56);
+  margin-bottom: 3vh;
+}
+.postContainer{
+  justify-content: center;
+  display: flex;
+  margin: 2vmax auto;
+  width: 76vw;
+  flex-wrap: wrap;
+  max-width: 100%;
+  border-radius: 30px;
+  /* background-color: white; */
+}
+.post{
+  background-color: white;
+  width: 30vmax;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: #303030;
+  margin: 4vw;
+  transition: all .5s;
+  padding-bottom: 0.5vmax;
+  box-shadow: 0px 2px 8px -2px rgb(0 0 0);
+    height: auto;
+} 
+.postHeader{
+margin-top: 1vmax;
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  margin: 4%;
+}
+.postHeader > h3{
+  font-size: 1.5vmax;
+  margin-top: 1vmax;
+}
+
+hr{
+width: 100%;
+border: 1px solid black;
+}
+.postBody > p{
+  text-align: start;
+  font-family: "Roboto";
+  font-size: 1.5vmax;
+  width: 89%;
+  /* padding: .5vmax; */
+  margin: auto;
+}
+.postBody > img,
+.postBody > video
+ {
+  width: 90%;
+  height: 22vmax;
+  font-size: 1.6vmax;
+  margin: 5%;
+}
+.postFooter{
+  margin: 5%;
+  width: 90%;
+}
+.fileInput{
+  margin: 5%;
+  width: 90%;
+}
+.fileInput >label> svg{
+  color: blue;
+  width: 50%;
+  margin: auto;
+  }
+
+.postFooter > p{
+  display: inline;
+  text-align: start;
+  font-family: "Roboto";
+  font-size: 1.5vmax;
+  margin: 16%;
+  width: 100%;
+}
+
+.postFooter > svg{
+color: blue;
+width: 50%;
+margin: auto;
+}
+
+
+
+@media (max-width: 770px) {
+  .AddPost {
+    width: 100%;
+    height: 10vh;
+    margin-top: 12vmax !important;
+  }
+  .AddPost > button {
+    font: 100 1rem "Roboto", sans-serif;
+    padding-left: 1vmax;
+  }
+  .postHeader > h3{
+    font-size: 2vmax;
+    margin-top: 2vmax;
+
+  }
+  .post{
+    width:green 30vw;
+  } 
+}
