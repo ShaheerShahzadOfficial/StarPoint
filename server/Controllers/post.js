@@ -4,24 +4,25 @@ const User = require('../models/userSchema')
 
 const createPost = async (req, res, next) => {
   try {
-    const myCloud = await cloudinary.v2.uploader.upload(req.body.image, {
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.files, {
       folder: 'SocialApp',
     })
     const newPostData = {
       caption: req.body.caption,
-      image: {
+      files: {
         public_id: myCloud?.public_id,
         url: myCloud?.secure_url,
       },
-      owner: req?.user?._id,
+      owner: req?.user?.id,
+      Filetype:req.body.Filetype
     }
-    const post = await Post?.create(newPostData)
+    const post = await Post.create(newPostData)
 
-    const user = await User?.findById(req.user.id)
+    const user = await User.findById(req.user.id)
 
-    user?.posts?.unshift(post._id)
+    user.posts.unshift(post._id)
 
-    await user?.save()
+    await user.save()
     res.status(201).json({
       success: true,
       message: 'Post created',
@@ -52,7 +53,7 @@ const deletePost = async (req, res) => {
       })
     }
 
-    await cloudinary.v2.uploader.destroy(post?.image?.public_id)
+    await cloudinary.v2.uploader.destroy(post?.files?.public_id)
 
     await post?.remove()
 

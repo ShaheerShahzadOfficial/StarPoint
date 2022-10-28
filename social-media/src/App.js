@@ -14,6 +14,8 @@ import Error from './component/Error/Error.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { LoadUser } from './Redux/Actions/Auth'
+import ProtectedRoute from './component/Routes/privateRoutes'
+import Search from './component/Search/Search'
 function App() {
   const dispatch = useDispatch()
 
@@ -31,11 +33,12 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
-          <Route exact path="/" element={<Home />} />
-          <Route path="/account" element={<UserProfile />} />
-          <Route path="/watch" element={<Video />} />
-          <Route path="/UpdatePassword" element={<UpdatePassword />} />
-          <Route path="/updateProfile" element={<UpdateProfile />} />
+          <Route exact path="/" element={<ProtectedRoute  isAuthenticated={isAuthenticated}> <Home /> </ProtectedRoute>} />
+          <Route path="/account" element={ <ProtectedRoute  isAuthenticated={isAuthenticated}><UserProfile /></ProtectedRoute>} />
+          <Route path="/watch" element={ <ProtectedRoute  isAuthenticated={isAuthenticated}><Video /> </ProtectedRoute>} />
+          <Route path="/UpdatePassword" element={ <ProtectedRoute  isAuthenticated={isAuthenticated}><UpdatePassword /></ProtectedRoute>} />
+          <Route path="/updateProfile" element={ <ProtectedRoute  isAuthenticated={isAuthenticated}> <UpdateProfile /> </ProtectedRoute>} />
+          <Route path='/search' element={<ProtectedRoute isAuthenticated={isAuthenticated}> <Search/> </ProtectedRoute>}/>
           <Route path="/password/reset/:token" element={<ResetPassword />} />
           <Route path="*" element={<Error />} />
         </Routes>

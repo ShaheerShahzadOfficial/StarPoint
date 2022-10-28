@@ -15,7 +15,7 @@ const Register = () => {
 
   const dispatch = useDispatch()
 const navigate = useNavigate()
-  const { isAuthenticated, error, loading } = useSelector((state) => state?.Auth)
+  const { isAuthenticated, error, loading,success } = useSelector((state) => state?.Auth)
 
 
   useEffect(() => {
@@ -25,7 +25,13 @@ const navigate = useNavigate()
     if (error?.msg === "You Are Already a User") {
         swal("Autentication Failed", "You Are Already Registered", "error")
     }
-}, [error, isAuthenticated, navigate])
+    if (success === true) {
+      swal("Success", "You Are Registered", "success")
+
+      navigate("/login")
+
+    }
+}, [error, isAuthenticated, navigate, success])
 
 
   const handleImageChange = (e) => {

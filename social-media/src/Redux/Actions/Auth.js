@@ -29,7 +29,7 @@ export const RegisterUser = (name, email, password, avatar) => async (
 
   await axios
     .post(
-      'http://localhost:4000/auth/signup',
+      'https://social-app-backend.vercel.app/auth/signup',
       {
         name,
         email,
@@ -59,7 +59,7 @@ export const LoginUser = (email, password) => async (dispatch) => {
 
   await axios
     .post(
-      'http://localhost:4000/auth/login',
+      'https://social-app-backend.vercel.app/auth/login',
       {
         email,
         password,
@@ -92,7 +92,7 @@ export const ForgotPasswordEmail = (email) => async (dispatch) => {
 
   await axios
     .post(
-      'http://localhost:4000/auth/forgot/password',
+      'https://social-app-backend.vercel.app/auth/forgot/password',
       {
         email,
       },
@@ -114,7 +114,7 @@ export const ForgotPasswordEmail = (email) => async (dispatch) => {
 
 export const Logout = () => async (dispatch) => {
   await axios
-    .delete('http://localhost:4000/auth/logout', {
+    .delete('https://social-app-backend.vercel.app/auth/logout', {
       withCredentials: true,
       credentials: 'include',
     })
@@ -138,7 +138,7 @@ export const ResetPasswordUser = (token, password, confirmPassword) => async (
 
   await axios
     .put(
-      ` http://localhost:4000/auth/password/reset/${token}`,
+      `https://social-app-backend.vercel.app/auth/password/reset/${token}`,
       {
         password,
         confirmPassword,
@@ -163,7 +163,7 @@ export const LoadUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST })
 
-    const { data } = await axios.get('http://localhost:4000/user/me', {
+    const { data } = await axios.get('https://social-app-backend.vercel.app/user/me', {
       withCredentials: true,
       credentials: 'include',
     })

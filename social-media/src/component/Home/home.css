@@ -120,7 +120,7 @@ border: 1px solid black;
 .postBody > p{
   text-align: start;
   font-family: "Roboto";
-  font-size: 1.5vmax;
+  font-size: 1.2rem;
   width: 89%;
   /* padding: .5vmax; */
   margin: auto;

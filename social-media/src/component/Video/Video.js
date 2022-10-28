@@ -12,7 +12,7 @@ const Video = () => {
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQTu5KbCBza-W8QilheYFFRNax0xbNnp13kTqmg_KE8w&s',
       caption: 'Forever Fashion',
       video:
-        'https://res.cloudinary.com/shaheerdev/video/upload/v1665423508/SocialApp/project_bnhkq2.mp4',
+        'https://res.cloudinary.com/shaheerdev/video/upload/v1666192068/SocialApp/project_i55fus.mp4',
       name: 'Shaheer',
       Likes: 2,
       Comments: 4,
@@ -22,7 +22,7 @@ const Video = () => {
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQTu5KbCBza-W8QilheYFFRNax0xbNnp13kTqmg_KE8w&s',
       caption: 'Vector Icons',
       video:
-        'https://res.cloudinary.com/shaheerdev/video/upload/v1665423508/SocialApp/project_bnhkq2.mp4',
+        'https://res.cloudinary.com/shaheerdev/video/upload/v1666192068/SocialApp/project_i55fus.mp4',
       name: 'Shaheer',
       Likes: 10,
       Comments: 4,

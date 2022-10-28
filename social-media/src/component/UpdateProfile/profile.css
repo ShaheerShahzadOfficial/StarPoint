@@ -1,82 +1,30 @@
-.BackGround {
-  background: rgb(12, 235, 235);
-  background: linear-gradient(
-    90deg,
-    rgba(12, 235, 235, 1) 0%,
-    rgba(32, 227, 178, 1) 50%,
-    rgba(41, 255, 198, 1) 100%
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2vmax;
-  box-sizing: border-box;
-  height: auto;
-  min-height: 100vh;
-}
-.loaderContainer {
-  background: rgb(12, 235, 235);
-  background: linear-gradient(
-    90deg,
-    rgba(12, 235, 235, 1) 0%,
-    rgba(32, 227, 178, 1) 50%,
-    rgba(41, 255, 198, 1) 100%
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2vmax;
-  box-sizing: border-box;
-  height: auto;
-  min-height: 100vh;
+.updateProfile{
+  background: rgb(12,235,235);
+background: linear-gradient(90deg, rgba(12,235,235,1) 0%, rgba(32,227,178,1) 50%, rgba(41,255,198,1) 100%);
+/* width: 100vw; */
+height: auto;
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 2vmax;
+box-sizing: border-box;
 }
 
-.loader {
+.updateProfileContainer{
   background-color: white;
-  /* height: 100%; */
-  width: 60%;
+  margin-top: 5vmax;
+  height: auto;
+  width: 50%;
   border-radius: 30px;
   box-sizing: border-box;
-  padding: 2vmax;
+  padding: 4vmax;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.Background1{
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    box-sizing: border-box;
-    height: auto;
-    min-height: 100vh;
-    width: 60%;
-}
-.UserProfiles{
-    background-color: white;
-    width: 100%;
-    border-radius: 30px;
-    box-sizing: border-box;
-    padding: 2vmax;
-    display: flex;
-    flex-direction: column;
-    align-items: center;  
-}
-
-.UserProfiles > div{
-    background-color: white;
-    width: 100%;
-    border-radius: 30px;
-    box-sizing: border-box;
-    padding: 2vmax;
-    display: flex;
-    flex-direction: column;
-    align-items: center;  
-}
-
-.UserProfiles > div > input{
+.updateProfileContainer > input{
   box-sizing: border-box;
   padding: 1vmax 2vmax;
   width: 80%;
@@ -87,7 +35,8 @@
   outline: none;
 }
 
-.UserProfiles > div > input[type="file"] {
+
+.updateProfileContainer > input[type="file"] {
   border-radius: 60px;
   margin: 1vmax;
   width: 60%;
@@ -95,7 +44,7 @@
   color: white;
 } 
 
-.UserProfiles > div > input[type="file"]::-webkit-file-upload-button {
+.updateProfileContainer > input[type="file"]::-webkit-file-upload-button {
   background-color: rgb(38, 63, 173);
   color: white;
   width: 100% !important;
@@ -104,7 +53,7 @@
   border: none;
   font: 100 1.2rem "Roboto", sans-serif;
 }
-.UserProfiles  > div  > input[type="file"]::file-selector-button{
+.updateProfileContainer > input[type="file"]::file-selector-button{
   background-color: rgb(38, 63, 173);
   color: white;
   width: 100% !important;
@@ -113,51 +62,41 @@
   border: none;
   font: 100 1.2rem "Roboto", sans-serif;
 }
-
-.UserProfiles  > a {
-    align-self: flex-end;
-    text-decoration: none;
-    color: rgba(0, 0, 0, 0.55);
-    margin: 2vmax;
-  }
-  @media screen and (max-width: 770px) {
-    .UserProfiles  {
-      width: 100%;
-    }
-    .UserProfiles  > h3{
-        margin: 8vw;
-        font-size: 6vmax;
-    }
-    .UserProfiles   > input[type="file"] {
-      width: 60%;
-      padding: 2vmax;
-      border-radius: 60px;
-
-    }
-  
-    .UserProfiles   > input[type="file"]::-webkit-file-upload-button {
-      width: 100%;
-    }
-    .UserProfiles  > input {
-      padding: 4vw 8vw;
-      margin: 2vmax;
-      font: 100 1.2rem "Roboto", sans-serif;
-      margin: 4vw;
-      width: 90%;
-    }
-  
-    .UserProfiles  > a {
-      align-self: center;
-      margin: 8vw;
-    }
-  }
 
 @media screen and (max-width: 770px) {
-  .UserProfiles  > div {
-    padding-top: 15vmax;
+  .updateProfileContainer {
+    margin-top: 15vmax;
+    width: 80%;
     height: auto;
-    max-width: 100%;
-    background-color: white;
-    margin: auto;
+  }
+  .updateProfileContainer > h3{
+      margin: 8vw;
+      font-size: 6vmax;
+  }
+
+  .updateProfileContainer > input {
+    padding: 4vw 8vw;
+    margin: 2vmax;
+    font: 100 1.2rem "Roboto", sans-serif;
+    margin: 4vw;
+    width: 96%;
+  }
+
+  .updateProfileContainer > button {
+    align-self: center;
+    margin: 8vw;
+  }
+  
+.updateProfileContainer > input[type="file"] {
+  width: 100%;
+} 
+}
+
+
+@media screen and (max-width: 400px) {
+  .updateProfileContainer {
+    margin-top: 0vmax;
+    width: 94%;
+    height: auto;
   }
 }

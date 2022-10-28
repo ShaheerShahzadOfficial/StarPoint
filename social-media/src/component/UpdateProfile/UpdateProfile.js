@@ -1,25 +1,40 @@
 import "./profile.css"
 import { Avatar, Button } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom"
+import { UpdateUserProfile } from "../../Redux/Actions/User"
+import { LoadUser } from "../../Redux/Actions/Auth"
+import { UPDATE_PROFILE_RESET } from "../../Redux/Constant"
 const UpdateProfile = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
 
     const navigate  = useNavigate()
+    const dispatch = useDispatch()
 
-    const { isAuthenticated, loading,user } = useSelector(
+    const { isAuthenticated, loading,user,isUpdated } = useSelector(
         (state) => state?.Auth,
       )
-      const [avatar, setAvatar] = useState(user?.avatar?.url)
+      const [avatar, setAvatar] = useState()
 
       
 useEffect(() => {
  if (!isAuthenticated) {
     navigate("/login")
  }
-}, [isAuthenticated, navigate])
+ if (user) {
+  setName(user?.name)
+  setEmail(user?.email)
+ }
+ if (isUpdated?.message==="Profile Updated") {
+      dispatch(LoadUser())
+      dispatch({
+        type:UPDATE_PROFILE_RESET
+      })
+      navigate("/Account")
+}
+}, [dispatch, isAuthenticated, isUpdated?.message, navigate, user])
 
 
       const handleImageChange = (e) => {
@@ -35,18 +50,16 @@ useEffect(() => {
         }
       }
 
+  const updateProfile = ()=>{
+    dispatch(UpdateUserProfile(name,email,avatar))
+  }
+
   return (
-    <div className="BackGround">
-      {loading ? (
-        <div className='profile'>
-          <div className='loaderContainer'> Loading ....</div>
-        </div>
-      ) : (
-        <div className="Background1">
-          <div className="UserProfiles">
-              <div>
-                <Avatar
-                  src={avatar}
+    <div className="updateProfile">
+  {
+    loading?<>loading ...</>:<div className="updateProfileContainer">
+             <Avatar
+                  src={avatar?avatar:user?.avatar?.url}
                   alt="User"
                   className="avatar"
                   sx={{
@@ -64,26 +77,16 @@ useEffect(() => {
           accept="image/*" style={{color:"white",border:"none"}}
           onChange={handleImageChange}
         />
-        <input
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <input placeholder="Name" value={name}   onChange={(e)=>setName(e.target.value)}  type={"text"} />
+        <input placeholder="Email" value={email}  onChange={(e)=>setEmail(e.target.value)} type={"email"}/>
+    
+            <Button onClick={updateProfile}>Update Profile</Button>
+       
+    </div>
+  }
 
-<Button>Update Profile</Button>
-              </div>
-              </div>
-             
-
-            </div>  
-
-      )}
-    </div>  )
+</div> 
+    )
 }
 
 export default UpdateProfile

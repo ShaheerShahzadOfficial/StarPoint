@@ -1,6 +1,7 @@
 const Post = require('../models/postSchema.js')
 const User = require('../models/userSchema.js')
 const { stringToHash, varifyHash } = require('bcrypt-inzi')
+const cloudinary = require('cloudinary');
 
 const loadUser = async (req, res, next) => {
   const user = await User.findById(req.user.id)
@@ -29,16 +30,21 @@ const updateProfile = async (req, res) => {
     }
 
     if (avatar) {
-      await cloudinary.v2.uploader.destroy(user.avatar.public_id)
+      await cloudinary.v2.uploader.destroy(user?.avatar?.public_id)
 
-      const myCloud = await cloudinary.v2.uploader.upload(avatar, {
-        folder: 'SocialAppAvatar',
-      })
-      user.avatar.public_id = myCloud.public_id
-      user.avatar.url = myCloud.secure_url
-    }
+if (avatar !== user.avatar.url) {
+  const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+    folder: 'SocialAppAvatar',
+  })
+  user.avatar.public_id = myCloud?.public_id
+  user.avatar.url = myCloud?.secure_url
+}
+await user.save()
+} 
 
-    await user.save()
+await user.save()
+
+
 
     res.status(200).json({
       success: true,
@@ -55,13 +61,13 @@ const updateProfile = async (req, res) => {
 const deleteMyProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user.id)
-    const posts = user.posts
+    const posts = user?.posts
     const followers = user.followers
     const following = user.following
-    const userId = user._id
+    const userId = user?._id
 
     // Removing Avatar from cloudinary
-    await cloudinary.v2.uploader.destroy(user.avatar.public_id)
+    await cloudinary.v2.uploader.destroy(user?.avatar?.public_id)
 
     await user.remove()
 
@@ -75,7 +81,7 @@ const deleteMyProfile = async (req, res) => {
     // Delete all posts of the user
     for (let i = 0; i < posts.length; i++) {
       const post = await Post.findById(posts[i])
-      await cloudinary.v2.uploader.destroy(post.image.public_id)
+      await cloudinary.v2.uploader.destroy(post.files.public_id)
       await post.remove()
     }
 

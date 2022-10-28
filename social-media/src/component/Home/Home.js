@@ -1,5 +1,5 @@
 import './home.css'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // import Alert from '@mui/material/Alert';
 import TextSnippetSharpIcon from '@mui/icons-material/TextSnippetSharp'
 import { Avatar, Box, Button, Modal, Typography } from '@mui/material'
@@ -7,24 +7,47 @@ import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined'
 import CommentIcon from '@mui/icons-material/Comment'
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary'
 import VideocamIcon from '@mui/icons-material/Videocam';
+import { CreatePost } from '../../Redux/Actions/Post'
+import {useDispatch, useSelector} from "react-redux"
+import swal from "sweetalert"
+import { LoadUser } from '../../Redux/Actions/Auth'
+import { CREATE_POST_RESET } from '../../Redux/Constant'
 const Home = () => {
   const [Open, setOpen] = useState(false)
 const [avatar, setAvatar] = useState("")
-const [Type, setType] = useState("")
+const [Filetype, setFiletype] = useState("")
+const [caption, setCaption] = useState("")
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
+const dispatch = useDispatch()
+const { isAuthenticated, loading, user } = useSelector((state) => state?.Auth)
+const {success} = useSelector(state => state.post)
   const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: "80%",
     bgcolor: 'background.paper',
     border: '2px solid transparent',
     boxShadow: 24,
     p: 3,
   }
+
+useEffect(() => {
+if (success === true) {
+  swal({text:"Post Has been Created",icon:"success"})
+  setOpen(false)
+  setAvatar("")
+  setCaption("")
+  dispatch({
+    type:CREATE_POST_RESET
+  })
+  dispatch(LoadUser())
+}
+}, [dispatch, success])
+
 
   const post = [
     {
@@ -62,32 +85,16 @@ const [Type, setType] = useState("")
     }
   }
 
-  const handleChange = (e) => {
-    const file = e.target.files[0]
-    var reader = new FileReader();
-    reader.readAsDataURL(file)
-    console.log(file)
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setAvatar(reader.result)
-        console.log(reader.result)
-      }
-    }
-
-    // var url = URL.createObjectURL(file.originFileObj);
-    // setAvatar(url);
-};
-
 const sharePost = ()=>{
-  alert("hello world")
+dispatch(CreatePost(caption,avatar,Filetype))
 }
 
   return (
     <div className="home">
       <div className="AddPost">
         <Avatar
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQTu5KbCBza-W8QilheYFFRNax0xbNnp13kTqmg_KE8w&s"
-          alt="User"
+          src={user?.avatar?.url}
+          alt={user?.avatar?.public_id}
           className="avatar"
           sx={{
             height: '8vh',
@@ -99,7 +106,7 @@ const sharePost = ()=>{
             zIndex: 1,
           }}
         />
-        <button onClick={handleOpen}>What's on your mind, User?</button>
+        <button onClick={handleOpen}>{`What's on your mind, ${user?user?.name:"User"}?`}</button>
 
         <Modal
           open={Open}
@@ -111,9 +118,11 @@ const sharePost = ()=>{
             <h2>Create Post</h2>
             <hr />
             <textarea
-              placeholder="What's on your mind, User?"
+              placeholder={`What's on your mind, ${user?user?.name:"User"}?`}
               style={{ resize: 'none' }}
               className="PostContent"
+              value={caption}
+              onChange={(e)=>{setCaption(e.target.value)}}
             />
             <br />
             <div className='fileInput'> 
@@ -124,7 +133,7 @@ const sharePost = ()=>{
               onChange={handleImageChange}
               style={{ display: 'none' }}
               type="file"
-              onClick={()=> setType("image")}
+              onClick={()=> setFiletype("image")}
             />
             <label htmlFor="icon-button-photo">
               <PhotoLibraryIcon />
@@ -134,10 +143,10 @@ const sharePost = ()=>{
               accept="video/*"
               className={'input'}
               id="icon-button-video"
-              onChange={handleChange}
+              onChange={handleImageChange}
               style={{ display: 'none' }}
               type="file"
-              onClick={()=> setType("video")}
+              onClick={()=> setFiletype("video")}
             />
             <label htmlFor="icon-button-video">
               <VideocamIcon />
@@ -145,15 +154,15 @@ const sharePost = ()=>{
             </div>
 
 {
-  Type === "image" ? <div style={{width:"60%",margin:"auto"}}> <img style={{width:"80%",height:"10%"}} src={avatar} alt={avatar}/> </div>:
+  Filetype === "image" ? avatar &&<div style={{width:"20%",margin:"auto"}}> <img style={{width:"80%",height:"10%"}} src={avatar} alt={avatar}/> </div>:
 <div> 
-  <p style={{textAlign:"center",width:"100%",margin:"0",fontSize:"1.3vmax",fontWeight:"600"}}>
-  Preview is not Available
+  <p style={{textAlign:"center",width:"100%",margin:"0",fontSize:"1rem",fontWeight:"600"}}>
+  Preview of video is not Available
   </p>
 </div>
 }
 
-<Button style={{marginTop:"1vmax",width:"100%"}} onClick={sharePost}>Share Post</Button>
+<Button style={{marginTop:"1vmax",width:"100%"}} variant="contained" onClick={sharePost}>Share Post</Button>
 
           </Box>
         </Modal>

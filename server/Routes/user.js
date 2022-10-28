@@ -11,8 +11,8 @@ UserRoute.route("/updateProfile").put(checkToken,updateProfile)
 UserRoute.route("/updatePassword").put(checkToken,updatePassword)
 UserRoute.route("/followAndUnfollowUser/:id")
 UserRoute.route("/getUserProfile/:id").get(checkToken,getUserProfile)
-UserRoute.route("/getAllUsers").get(checkToken,getAllUsers)
-UserRoute.route("/getMyPosts").get(checkToken,getMyPosts)
+UserRoute.route("/getAllUsers").get(getAllUsers)
+UserRoute.route("/getMyPosts").get(getMyPosts)
 UserRoute.route("/getUsersPost/:id").get(getUserPosts)
 
 

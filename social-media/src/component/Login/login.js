@@ -16,14 +16,14 @@ const navigate = useNavigate()
 
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/Account")
+    if (!loading && isAuthenticated) {
+      navigate("/account")
     }
    
     if (error?.msg === "You Are Not Registered User") {
       swal("Autentication Failed", "You Are Not Registered User", "error")
   }
-}, [error, isAuthenticated, navigate])
+}, [error, isAuthenticated, loading, navigate])
 
 
 const loginUser = () => {
