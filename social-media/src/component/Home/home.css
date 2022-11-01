@@ -1,12 +1,12 @@
 .home {
-  /* background-color: white; */
+  background-color: rgba(0, 255, 247, 0.46);
   align-items: center;
   justify-content: center;
   padding: 2vmax;
   box-sizing: border-box;
-  /* background: linear-gradient(90deg, rgba(12,235,235,1) 0%, rgba(32,227,178,1) 50%, rgba(41,255,198,1) 100%); */
-height: auto;
-min-height: 100vh;
+  height: auto;
+  min-height: 100vh;
+  padding-top: 10vh;
 }
 .noPost {
   margin: auto;
@@ -21,12 +21,12 @@ min-height: 100vh;
 .noPost > svg {
   font-size: 10vmax;
   /* color: rgb(255, 0, 76); */
-  color: #155799;
+  color: rgb(0, 0, 0);
 }
 .noPost > p {
   font: 600 2vmax "Roboto";
   padding: 3vmax 3vmax;
-  color: #155799;
+  color: #000000;
 }
 .noPost > a {
   background-color: rgb(51, 51, 51);
@@ -39,15 +39,14 @@ min-height: 100vh;
 }
 .AddPost {
   width: 50%;
-  box-shadow:0px 0px 2px 1px  rgb(0, 0, 0);   
-  height: 10vh;
-  margin-top: 6vmax !important;
+  box-shadow: 0px 0px 2px 1px rgb(0, 0, 0);
+  /* height: 10vh; */
+  margin-top: 4vmax !important;
   margin: auto;
   border-radius: 100px;
   display: flex;
   flex-direction: row;
   background-color: white;
-  
 }
 .AddPost > button {
   box-sizing: border-box;
@@ -72,114 +71,444 @@ min-height: 100vh;
   outline: none;
   background-color: transparent;
 }
+
+.PostContent::-webkit-scrollbar {
+  display: none;
+ }
+
 .CreatePost > h2 {
   text-align: center;
   color: rgb(56, 56, 56);
   margin-bottom: 3vh;
 }
-.postContainer{
+.postContainer {
   justify-content: center;
   display: flex;
   margin: 2vmax auto;
   width: 76vw;
   flex-wrap: wrap;
-  max-width: 100%;
   border-radius: 30px;
-  /* background-color: white; */
 }
-.post{
+.post {
   background-color: white;
-  width: 30vmax;
+  width: 32vmax;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   text-decoration: none;
   color: #303030;
   margin: 4vw;
-  transition: all .5s;
+  transition: all 0.5s;
   padding-bottom: 0.5vmax;
   box-shadow: 0px 2px 8px -2px rgb(0 0 0);
-    height: auto;
-} 
-.postHeader{
-margin-top: 1vmax;
+  height: auto;
+}
+.postHeader {
+  margin-top: 1vmax;
   display: flex;
   flex-direction: row;
   width: 90%;
   margin: 4%;
 }
-.postHeader > h3{
-  font-size: 1.5vmax;
-  margin-top: 1vmax;
+
+.postHeader > svg{
+  font-size: 3.6vmax;
+  margin-top: 0.3vmax;
+  margin-left: 2.3vmax;
+  color: rgb(8, 97, 71);
+  cursor: pointer;
 }
 
-hr{
-width: 100%;
-border: 1px solid black;
+.postHeader > a {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  flex-direction: row;
 }
-.postBody > p{
+.postHeader > a > h3 {
+  text-align: center;
+  font-size: 1.4vmax;
+  margin-top: 1vmax;
+  width: 80%;
+}
+
+
+
+hr {
+  width: 100%;
+  border: 1px solid black;
+}
+.postBody > p {
   text-align: start;
-  font-family: "Roboto";
-  font-size: 1.2rem;
+  font-family: initial;
+  font-size: 1.6vmax;
   width: 89%;
-  /* padding: .5vmax; */
   margin: auto;
+  font-weight: 600;
 }
-.postBody > img,
-.postBody > video
- {
+.postBody > img {
   width: 90%;
   height: 22vmax;
   font-size: 1.6vmax;
   margin: 5%;
+  box-sizing: border-box;
 }
-.postFooter{
+
+.postBody > video {
+  width: 90%;
+  font-size: 1.6vmax;
+  margin: 5%;
+  box-sizing: border-box;
+}
+.postFooter {
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 2%;
+  width: 96%;
+  height: auto;
+}
+.fileInput {
   margin: 5%;
   width: 90%;
 }
-.fileInput{
-  margin: 5%;
-  width: 90%;
-}
-.fileInput >label> svg{
+.fileInput > label > svg {
   color: blue;
+  width: 100%;
+  margin: auto;
+}
+
+.postFooter > p {
+  display: inline;
+  text-align: end !important;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 1.8vmax;
+  width: 100%;
+  margin: 3.6vmax;
+}
+
+.postFooter > svg {
+  color: rgb(132, 19, 19);
   width: 50%;
   margin: auto;
-  }
-
-.postFooter > p{
-  display: inline;
-  text-align: start;
-  font-family: "Roboto";
-  font-size: 1.5vmax;
-  margin: 16%;
-  width: 100%;
+  font-size: 2.4vmax;
+  margin-top: 2%;
+  cursor: pointer;
 }
 
-.postFooter > svg{
-color: blue;
-width: 50%;
+.commentContainer {
+  width: 90%;
+  max-height: 66vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1vmax;
+}
+
+.commentContainer::-webkit-scrollbar {
+  display: none;
+}
+
+
+.comment {
+ width:100%;
+  margin: 1vmax auto;
+  float: left;
+  position: relative;
+  /* display: flex; */
+}
+
+.commentCard:hover{
+  transform: translateY(-10px);
+
+}
+
+.commentCard{
+  width:auto;
+  border-radius: 10px;
+  max-width: 80%;
+  border: 2px solid #efefef;
+  background-color: rgb(240, 240, 240);
+}
+
+.CommentHeader > svg{
+color: red;
+}
+
+.CommentHeader {
+  margin-top: 1vmax;
+  display: flex;
+  /* flex-direction: row; */
+  width: auto;
+  max-width: 90%;
+  margin: 4%;
+  margin-bottom: 1vmax !important;
+}
+
+.following{
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  width: 90%;
+}
+
+.following > a{
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  margin-top: 1vmax;
+
+}
+.following > a > h3{
+  text-align: center;
+  font-size: 1.8vmax;
+  margin-top: 0.6vmax;
+  width: auto;
+}
+
+.CommentHeader > a {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  flex-direction: row;
+}
+.CommentHeader > a > h3 {
+  text-align: center;
+  font-size: 1.8vmax;
+  margin-top: 0vmax;
+}
+
+.CommentBody{
+  width: auto;
+  max-width: 90%;
+}
+.CommentBody > p{
+  width: auto;
+  max-width: 80%;
+  margin: auto; 
+font: 500 2vmax "Roboto";
+text-align: start;
+  padding: 1vmax;
+}
+
+
+.modal > div::-webkit-scrollbar {
+  display: none;
+ }
+
+ 
+ .modal{
+  outline: none;
+  border: none;
+}
+
+ .addComment{
+  position: sticky;
+  z-index: 100;
+  display: flex;
+ }
+ .addComment > textarea{
+  width: 94%;
+  border: 2px solid rgb(218, 218, 218);
+  border-radius: 10px;
+  padding: 1vmax;
+ }
+ .addComment  > svg{
+  margin-top:1vmax ;
+  font-size: 4vmax;
+  color:rgba(0, 180, 186, 0.916);
+ }
+
+
+
+
+.captionUpdate{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  background-color: white;
+  border:"2px solid transparent";
+  height:"20vh";
+  overflow-y:"auto";
+  padding: 2vmax;
+  outline: none;
+}
+
+.btnContainer{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20%;
+  background-color: white;
+  border:"2px solid transparent";
+  height:"20vh";
+  overflow-y:"auto";
+  padding: 2vmax;
+  outline: none;
+  
+}
+
+.commentForm{
+  width: 90%;
 margin: auto;
 }
 
+.commentForm > input{
+  width: 90%;
+  padding:  1vmax;
+  margin: auto;
+  box-sizing: border-box;
+}
+
+.commentForm > button,
+.DialogBox > button{
+  margin-top: 2vmax !important;
+  width: 90%;
+  margin: auto;
+  box-sizing: border-box;
+}
 
 
 @media (max-width: 770px) {
   .AddPost {
     width: 100%;
     height: 10vh;
-    margin-top: 12vmax !important;
+    margin-top: 7vmax !important;
   }
   .AddPost > button {
     font: 100 1rem "Roboto", sans-serif;
     padding-left: 1vmax;
   }
-  .postHeader > h3{
-    font-size: 2vmax;
-    margin-top: 2vmax;
 
+  .postHeader > svg{
+    font-size: 6vmax;
+    margin-top: 1vmax;
+    margin-left: 2vmax;
+    color: rgb(8, 97, 71);
+    cursor: pointer;
   }
-  .post{
-    width:green 30vw;
-  } 
+
+  .postHeader > a > h3 {
+    font-size: 2.3vmax;
+    margin-top: 2vmax;
+  }
+  .postBody > video {
+    height: auto;
+    min-height: 26vmax;
+    width: 100%;
+    margin: auto;
+  }
+  .postFooter > svg {
+    font-size: 4vmax;
+  }
+  .postBody > p {
+    font-size: 3vmax;
+  }
+
+
+  .commentContainer {
+    width: 100%;
+    padding: 2vmax;
+  }
+
+
+  .comment {
+    width: 100%;
+    margin: 1vmax auto;
+  }
+.commentCard{
+  width: 120%;
+  border-radius: 20px;
+}  
+  .CommentHeader {
+    margin-bottom: 1vmax !important;
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    width: auto;
+    margin: 4%;
+  }
+
+
+  .CommentHeader > a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    flex-direction: row;
+  }
+  .CommentHeader > a > h3 {
+    text-align: center;
+    font-size: 1.8vmax;
+    margin-top: 1vmax;
+  }
+  
+  .CommentBody{
+    max-width: 100%;
+    width: auto;
+  }
+  .CommentBody > p{
+    width: auto;
+    max-width: 90%;
+    margin: auto; 
+  font: 500 2vmax "Roboto";
+  text-align: start;
+  }
+
+.addComment{
+  width: 110%;  
+}
+
+  .addComment > textarea{
+    width: 100%;
+    border: 2px solid rgb(218, 218, 218);
+    border-radius: 10px;
+    padding: 1.6vmax;
+   }
+   .addComment  > svg{
+    margin-top:2vmax ;
+    font-size: 6vmax;
+    color:rgba(0, 180, 186, 0.916);
+   }
+
+   .captionUpdate{
+    width: 60%;
+   }
+   .btnContainer{
+    width: 60%;
+   }
+
+   .following{
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    width: 90%;
+  }
+  
+  .following > a{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: row;
+    width: 120%;
+    margin-bottom: 2vmax;
+  
+  }
+  .following > a > h3{
+    text-align: center;
+    font-size: 2vmax;
+    margin-top: 2.6vmax;
+    width: auto;
+  }
+.modal3 > div{
+  width: auto !important;
+  min-width: 66%;
+  max-width: 100%;
+  padding: 10%;
+  overflow-y: auto;
+}
+
+
 }

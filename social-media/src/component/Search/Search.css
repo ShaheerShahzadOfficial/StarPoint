@@ -13,7 +13,7 @@
   .searchForm {
     margin-top: 6vmax !important;
     background-color: white;
-    height: 100%;
+    height: 80vh;
     width: 50%;
     border-radius: 30px;
     box-sizing: border-box;
@@ -34,6 +34,9 @@
     outline: none;
   }
   
+  .searchForm > h3{
+    font-size: 4vmax;
+  }
   .searchResults {
     width: 100%;
     height: 100%;
@@ -41,6 +44,25 @@
     padding: 2vmax;
     box-sizing: border-box;
   }
+
+  .searchResults::-webkit-scrollbar {
+    width: 1.4vmax;
+    height: 1vmax;
+  }
+   
+  .searchResults::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(142, 142, 142, 0.774);
+    border-radius: 30px;
+  }
+   
+  .searchResults::-webkit-scrollbar-thumb {
+    background: rgb(0, 127, 182); 
+    border-radius: 100px;
+    height: 4vmax;
+  }
+ 
+  
+
 
   .homeUser {
     display: flex;
@@ -54,7 +76,7 @@
     width: 6vmax;
     margin: 1vmax;
     border-radius: 100%;
-    border: 3px solid  rgb(12,235,235);
+    border: 3px solid steelblue;
   }
   
   .homeUser:hover {
@@ -63,7 +85,12 @@
   
   @media screen and (max-width: 600px) {
     .searchForm {
-      width: 100%;
+      width: 90%;
+      height: auto;
+      min-height: 60vh;
+    }
+    .searchForm > h3{
+      font-size: xx-large;
     }
   
     .searchForm > input {

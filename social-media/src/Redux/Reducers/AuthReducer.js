@@ -39,7 +39,9 @@ import {
 
   GET_All_USERS_FAIL,
   GET_All_USERS_SUCCESS,
-  GET_All_USERS_REQUEST
+  GET_All_USERS_REQUEST,
+  MY_PROFILE,
+  MY_PROFILE_FAIL
 } from '../Constant'
 
 const initialState = {
@@ -69,6 +71,7 @@ export default function AuthReducer(state = initialState, actions) {
 
     case LOGIN_USER:
     case LOAD_USER:
+      case MY_PROFILE:
       return {
         loading: false,
         isAuthenticated: true,
@@ -101,6 +104,7 @@ export default function AuthReducer(state = initialState, actions) {
       }
 
     case LOAD_USER_FAIL:
+    case MY_PROFILE_FAIL:
       return {
         isAuthenticated: false,
         loading: false,

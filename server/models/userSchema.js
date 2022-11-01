@@ -24,14 +24,14 @@ posts: [
   followers: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "Users",
     },
   ],
 
   following: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "Users",
     },
   ],
 resetPasswordToken: String,

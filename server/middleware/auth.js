@@ -7,11 +7,10 @@ function checkToken(req, res, next) {
   if (!authToken) {
     return res.status(401).json({
       Error: 'Please Login to access this resource',
+      authToken
     })
   }
 
-  console.log(authToken)
-  //verify token which is in cookie value
   jsonwebtoken.verify(authToken, process.env.ACCESS_TOKEN, (err, decoded) => {
     if (err) {
       res.status(403).json({

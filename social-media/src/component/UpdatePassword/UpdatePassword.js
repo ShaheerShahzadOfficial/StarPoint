@@ -8,7 +8,7 @@ import { UpdateUsersPassword } from "../../Redux/Actions/User"
 const UpdatePassword = () => {
   const [oldPassword, setOldPassword] = useState("")
   const [newPassword, setNewPassword] = useState("")
-  const { isAuthenticated, error, loading } = useSelector(
+  const { isAuthenticated, loading } = useSelector(
     (state) => state?.Auth,
   )
   const dispatch = useDispatch()

@@ -10,8 +10,11 @@ import {
   DELETE_COMMENT_POST_REQUEST,
   DELETE_COMMENT_POST_SUCCESS,
   DELETE_POST_FAIL,
-  DELETE_POST_REQUEST,
+  DELETE_POST_RESET,
   DELETE_POST_SUCCESS,
+  FOLLOW_USER_FAIL,
+  FOLLOW_USER_REQUEST,
+  FOLLOW_USER_SUCCESS,
   GET_MY_POST_FAIL,
   GET_MY_POST_REQUEST,
   GET_MY_POST_SUCCESS,
@@ -26,9 +29,10 @@ import {
   GET_USERS_PROFILE_SUCCESS,
   LIKE_AND_UNLIKE_POST_FAIL,
   LIKE_AND_UNLIKE_POST_REQUEST,
+  LIKE_AND_UNLIKE_POST_RESET,
   LIKE_AND_UNLIKE_POST_SUCCESS,
   UPDATE_POST_FAIL,
-  UPDATE_POST_REQUEST,
+  UPDATE_POST_RESET,
   UPDATE_POST_SUCCESS,
 } from '../Constant'
 
@@ -42,12 +46,9 @@ const initialState = {
 export function PostReducer(state = initialState, actions) {
   switch (actions.type) {
     case CREATE_POST_REQUEST:
-    case UPDATE_POST_REQUEST:
-    case DELETE_POST_REQUEST:
-      return {
-        loading: true,
-      }
-
+        return {
+          loading: true,
+        }
     case CREATE_POST_SUCCESS:
       return {
         loading: false,
@@ -57,6 +58,17 @@ export function PostReducer(state = initialState, actions) {
         return{
           success: false,
         }
+        case DELETE_POST_RESET:
+          return {
+            loading: false,
+            isDeleted: false,
+          }
+
+          case UPDATE_POST_RESET:
+            return {
+              loading: false,
+              isUpdated: false,
+            }
     case UPDATE_POST_SUCCESS:
       return {
         loading: false,
@@ -141,7 +153,7 @@ export function LikeAndCommentReducer(state = initialState, actions) {
     case DELETE_COMMENT_POST_SUCCESS:
       return {
         loading: false,
-        message: actions.type,
+        message: actions.payload?.message,
       }
     case LIKE_AND_UNLIKE_POST_FAIL:
     case COMMENT_ON_POST_FAIL:
@@ -150,6 +162,13 @@ export function LikeAndCommentReducer(state = initialState, actions) {
         loading: false,
         error: actions.payload,
       }
+
+      case LIKE_AND_UNLIKE_POST_RESET:
+        return{
+          loading: false,
+          message: null
+        }
+
     default:
       return state
   }
@@ -175,3 +194,32 @@ export function UserProfileReducer(state = initialState, actions) {
       return state
   }
 }
+
+
+
+
+export function FollowReducer(state = initialState, actions) {
+
+switch (actions.type) {
+  case FOLLOW_USER_REQUEST:
+   return{
+    loading:true
+   }
+
+   case FOLLOW_USER_SUCCESS:
+   return{
+    loading:false,
+    message : actions.payload
+   }
+
+   case FOLLOW_USER_FAIL:
+   return{
+    loading:false,
+    error : actions.payload
+   }
+
+  default:
+    return state;
+}
+
+  }

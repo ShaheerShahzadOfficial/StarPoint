@@ -29,7 +29,7 @@ export const RegisterUser = (name, email, password, avatar) => async (
 
   await axios
     .post(
-      'https://social-app-backend.vercel.app/auth/signup',
+      'https://starpointbackend.vercel.app/auth/signup',
       {
         name,
         email,
@@ -55,11 +55,9 @@ export const RegisterUser = (name, email, password, avatar) => async (
 export const LoginUser = (email, password) => async (dispatch) => {
   dispatch({ type: LOGIN_USER_REQUEST })
 
-  // const config = { headers: { "Content-Type": "application/json" } }
-
   await axios
     .post(
-      'https://social-app-backend.vercel.app/auth/login',
+      'https://starpointbackend.vercel.app/auth/login',
       {
         email,
         password,
@@ -92,7 +90,7 @@ export const ForgotPasswordEmail = (email) => async (dispatch) => {
 
   await axios
     .post(
-      'https://social-app-backend.vercel.app/auth/forgot/password',
+      'https://starpointbackend.vercel.app/auth/forgot/password',
       {
         email,
       },
@@ -114,7 +112,7 @@ export const ForgotPasswordEmail = (email) => async (dispatch) => {
 
 export const Logout = () => async (dispatch) => {
   await axios
-    .delete('https://social-app-backend.vercel.app/auth/logout', {
+    .delete('https://starpointbackend.vercel.app/auth/logout', {
       withCredentials: true,
       credentials: 'include',
     })
@@ -138,7 +136,7 @@ export const ResetPasswordUser = (token, password, confirmPassword) => async (
 
   await axios
     .put(
-      `https://social-app-backend.vercel.app/auth/password/reset/${token}`,
+      `https://starpointbackend.vercel.app/auth/password/reset/${token}`,
       {
         password,
         confirmPassword,
@@ -163,7 +161,7 @@ export const LoadUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOAD_USER_REQUEST })
 
-    const { data } = await axios.get('https://social-app-backend.vercel.app/user/me', {
+    const { data } = await axios.get('https://starpointbackend.vercel.app/user/me', {
       withCredentials: true,
       credentials: 'include',
     })

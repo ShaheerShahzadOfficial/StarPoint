@@ -2,11 +2,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 2px 2px 2px 2px rgb(242, 242, 242);  
+    /* box-shadow: 0px 0px 5px 3px rgb(0, 213, 255); */
     position: fixed;
-     background-color: white;
-  width: 100%;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
     z-index: 120;
+    /* height: 8vw; */
   }
   
   .header > a {
@@ -15,23 +16,33 @@
     margin: 1vmax 4vmax;
   }
   .header > a > svg {
-    font-size: 2.5vmax;
+    font-size: 3vmax;
     transition: all 0.5s;
-    color: rgb(0, 0, 255);
+    color: rgb(0, 15, 131);
+   
   }
   
   .header > a > svg:hover {
-    color: rgb(0, 119, 255);
+    color: rgb(76, 0, 255);
     transform: scale(1.2);
   }
+
+ 
   
   @media screen and (max-width: 770px) {
+    .header{
+      min-height: 1vh;
+      padding-bottom: 0.5vh;
+    }
     .header > a {
       width: 8vw;
       height: 8vw;
-      margin: 2vw 8vw;
+      margin: 3vw 8vw;
+     /* margin-top: 12vmax !important; */
+     /* margin-bottom: 6vw !important; */
+
     }
     .header > a > svg {
-      font-size: 8vw;
+      font-size: 6vmax;
     }
   }

@@ -7,6 +7,7 @@ const createPost = async (req, res, next) => {
     const myCloud = await cloudinary.v2.uploader.upload(req.body.files, {
       folder: 'SocialApp',
     })
+    
     const newPostData = {
       caption: req.body.caption,
       files: {
@@ -14,7 +15,6 @@ const createPost = async (req, res, next) => {
         url: myCloud?.secure_url,
       },
       owner: req?.user?.id,
-      Filetype:req.body.Filetype
     }
     const post = await Post.create(newPostData)
 
@@ -46,7 +46,7 @@ const deletePost = async (req, res) => {
       })
     }
 
-    if (post?.owner?.toString() !== req?.user?._id.toString()) {
+    if (post?.owner?.toString() !== req?.user?.id.toString()) {
       return res.status(401).json({
         success: false,
         message: 'Unauthorized',
@@ -55,7 +55,7 @@ const deletePost = async (req, res) => {
 
     await cloudinary.v2.uploader.destroy(post?.files?.public_id)
 
-    await post?.remove()
+    await post.remove()
 
     const user = await User.findById(req.user.id)
 
@@ -98,6 +98,7 @@ const getPostOfFollowing = async (req, res) => {
   }
 }
 
+
 const updateCaption = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id)
@@ -114,9 +115,14 @@ const updateCaption = async (req, res) => {
         message: 'Unauthorized',
       })
     }
-    post.caption = req.body.caption
+await Post.findByIdAndUpdate(req.params.id,{
+  caption:req.body.caption
+})
 
-    await post.save()
+res.status(200).json({
+  success:true
+})
+
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -196,9 +202,66 @@ const post = await Post.findById(req.params.id);
 }
 }
 
-const DeleteCommentPost  = async (req, res)=>{
+// const DeleteCommentPost  = async (req, res)=>{
+//   try {
+//     const post = await Post.findById(req.params.id);
+
+//     if (post.owner.toString() === req.user.id.toString()) {
+//       if (req.body.commentId === undefined) {
+//         return res.status(400).json({
+//           success: false,
+//           message: "Comment Id is required",
+//         });
+//       }
+
+//       post.comments.forEach((item, index) => {
+//         if (item._id.toString() === req.body.commentId.toString()) {
+//           return post.comments.splice(index, 1);
+//         }
+//       });
+
+//       await post.save();
+
+//       return res.status(200).json({
+//         success: true,
+//         message: "Selected Comment has deleted",
+//       });
+//     } else {
+//       post.comments.forEach((item, index) => {
+//         if (item.user.toString() === req.user.id.toString()) {
+//           return post.comments.splice(index, 1);
+//         }
+//       });
+
+//       await post.save();
+
+//       return res.status(200).json({
+//         success: true,
+//         message: "Your Comment has deleted",
+//       });
+//     }
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       message: error.message,
+//     });
+//   }
+// }
+
+
+const deleteComment = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
+
+
+    if (!post) {
+      return res.status(404).json({
+        success: false,
+        message: "Post not found",
+      });
+    }
+
+    // Checking If owner wants to delete
 
     if (post.owner.toString() === req.user.id.toString()) {
       if (req.body.commentId === undefined) {
@@ -240,7 +303,7 @@ const DeleteCommentPost  = async (req, res)=>{
       message: error.message,
     });
   }
-}
+};
 
 module.exports = {
   createPost,
@@ -249,5 +312,6 @@ module.exports = {
   updateCaption,
   likeAndUnlikePost,
   commentOnPost,
-  DeleteCommentPost
+  deleteComment,
+  
 }

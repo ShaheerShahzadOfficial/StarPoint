@@ -8,10 +8,6 @@ const postSchema = mongoose.Schema({
     url: { type: String, required: true },
   },
 
-  Filetype: {
-    type: String,
-  },
-
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Users',

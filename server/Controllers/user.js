@@ -1,18 +1,18 @@
 const Post = require('../models/postSchema.js')
 const User = require('../models/userSchema.js')
 const { stringToHash, varifyHash } = require('bcrypt-inzi')
-const cloudinary = require('cloudinary');
+const cloudinary = require('cloudinary')
 
 const loadUser = async (req, res, next) => {
   const user = await User.findById(req.user.id)
   if (!user) {
     res.status(404).json({
-      Error: 'User Not Found',
+      Error: 'User Not Found'
     })
   }
   res.status(200).json({
     success: true,
-    user,
+    user
   })
 }
 
@@ -32,28 +32,26 @@ const updateProfile = async (req, res) => {
     if (avatar) {
       await cloudinary.v2.uploader.destroy(user?.avatar?.public_id)
 
-if (avatar !== user.avatar.url) {
-  const myCloud = await cloudinary.v2.uploader.upload(avatar, {
-    folder: 'SocialAppAvatar',
-  })
-  user.avatar.public_id = myCloud?.public_id
-  user.avatar.url = myCloud?.secure_url
-}
-await user.save()
-} 
+      if (avatar !== user.avatar.url) {
+        const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+          folder: 'SocialAppAvatar'
+        })
+        user.avatar.public_id = myCloud?.public_id
+        user.avatar.url = myCloud?.secure_url
+      }
+      await user.save()
+    }
 
-await user.save()
-
-
+    await user.save()
 
     res.status(200).json({
       success: true,
-      message: 'Profile Updated',
+      message: 'Profile Updated'
     })
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message,
+      message: error.message
     })
   }
 }
@@ -75,7 +73,7 @@ const deleteMyProfile = async (req, res) => {
 
     res.cookie('token', null, {
       expires: new Date(Date.now()),
-      httpOnly: true,
+      httpOnly: true
     })
 
     // Delete all posts of the user
@@ -131,12 +129,12 @@ const deleteMyProfile = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: 'Profile Deleted',
+      message: 'Profile Deleted'
     })
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message,
+      message: error.message
     })
   }
 }
@@ -150,7 +148,7 @@ const updatePassword = async (req, res) => {
     if (!oldPassword || !newPassword) {
       return res.status(400).json({
         success: false,
-        message: 'Please provide old and new password',
+        message: 'Please provide old and new password'
       })
     }
 
@@ -161,22 +159,22 @@ const updatePassword = async (req, res) => {
       console.log(isMatch)
       return res.status(400).json({
         success: false,
-        message: 'Incorrect Old password',
+        message: 'Incorrect Old password'
       })
     }
-    stringToHash(newPassword).then(async (string) => {
-      await User.findByIdAndUpdate(req.user.id,{password:string})
+    stringToHash(newPassword).then(async string => {
+      await User.findByIdAndUpdate(req.user.id, { password: string })
     })
     await user?.save()
 
     res.status(200).json({
       success: true,
-      message: 'Password Updated',
+      message: 'Password Updated'
     })
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message,
+      message: error.message
     })
   }
 }
@@ -189,13 +187,44 @@ const followAndUnfollowUser = async (req, res) => {
     if (!UserToBeFollowed) {
       return res.status(404).json({
         success: false,
-        message: 'User not found',
+        message: 'User not found'
+      })
+    }
+
+    if (LoggedInUser.following.includes(UserToBeFollowed._id)) {
+      const indexfollowing = LoggedInUser.following.indexOf(
+        UserToBeFollowed._id
+      )
+      const indexfollowers = UserToBeFollowed.followers.indexOf(
+        LoggedInUser._id
+      )
+
+      LoggedInUser.following.splice(indexfollowing, 1)
+      UserToBeFollowed.followers.splice(indexfollowers, 1)
+
+      await LoggedInUser.save()
+      await UserToBeFollowed.save()
+
+      res.status(200).json({
+        success: true,
+        message: 'User Unfollowed'
+      })
+    } else {
+      LoggedInUser.following.push(UserToBeFollowed._id)
+      UserToBeFollowed.followers.push(LoggedInUser._id)
+
+      await LoggedInUser.save()
+      await UserToBeFollowed.save()
+
+      res.status(200).json({
+        success: true,
+        message: 'User followed'
       })
     }
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message,
+      message: error.message
     })
   }
 }
@@ -203,122 +232,120 @@ const followAndUnfollowUser = async (req, res) => {
 const myProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).populate(
-      "posts followers following"
-    );
+      'posts followers following'
+    )
 
     res.status(200).json({
       success: true,
-      user,
-    });
+      user
+    })
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message,
-    });
+      message: error.message
+    })
   }
-};
+}
 
 const getUserProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).populate(
-      "posts followers following"
-    );
+    const users = await User.findById(req.params.id).populate(
+      'posts followers following'
+    )
 
-    if (!user) {
+   const post = await Post.find({owner:users._id}).populate("comments.user")
+
+    if (!users) {
       return res.status(404).json({
         success: false,
-        message: "User not found",
-      });
+        message: 'User not found'
+      })
+    }
+
+    const user = {
+      users,
+      post
     }
 
     res.status(200).json({
       success: true,
-      user,
-    });
-
-
+      user
+    })
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message,
-    });
+      message: error.message
+    })
   }
-};
+}
 
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.find({
-      name: { $regex: req.query.name, $options: "i" },
-    });
+      name: { $regex: req.query.name, $options: 'i' }
+    })
 
     res.status(200).json({
       success: true,
-      users,
-    });
+      users
+    })
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message,
-    });
+      message: error.message
+    })
   }
-};
-
-
-
-
-
+}
 
 const getMyPosts = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(req.user.id)
 
-    const posts = [];
+    const posts = []
 
     for (let i = 0; i < user.posts.length; i++) {
       const post = await Post.findById(user.posts[i]).populate(
-        "likes comments.user owner"
-      );
-      posts.push(post);
+        'likes comments.user owner'
+      )
+      posts.push(post)
     }
 
     res.status(200).json({
       success: true,
-      posts,
-    });
+      posts
+    })
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message,
-    });
+      message: error.message
+    })
   }
-};
+}
 
 const getUserPosts = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id)
 
-    const posts = [];
+    const posts = []
 
     for (let i = 0; i < user.posts.length; i++) {
       const post = await Post.findById(user.posts[i]).populate(
-        "likes comments.user owner"
-      );
-      posts.push(post);
+        'likes comments.user owner'
+      )
+      posts.push(post)
     }
 
     res.status(200).json({
       success: true,
-      posts,
-    });
+      posts
+    })
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message,
-    });
+      message: error.message
+    })
   }
-};
-
-
+}
 
 module.exports = {
   loadUser,
@@ -328,6 +355,7 @@ module.exports = {
   followAndUnfollowUser,
   myProfile,
   getUserProfile,
-  getAllUsers,getUserPosts,
+  getAllUsers,
+  getUserPosts,
   getMyPosts
 }

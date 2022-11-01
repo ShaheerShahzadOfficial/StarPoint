@@ -1,20 +1,27 @@
-import { Button, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUser } from "../../Redux/Actions/User";
 import User from "../User/User";
 import "./Search.css";
 
 const Search = () => {
-  // const [name, setName] = useState("");
+  const [name, setName] = useState("");
 
-  const { users, loading } = useSelector((state) => state.allUsers);
+  
+
+  const { users } = useSelector((state) => state.allUsers);
 
   const dispatch = useDispatch();
   // const submitHandler = (e) => {
   //   e.preventDefault();
   //   dispatch(getAllUser(name));
   // };
+
+  useEffect(() => {
+    dispatch(getAllUser(name));
+
+  }, [dispatch, name])
 
   return (
     <div className="search">
@@ -25,9 +32,10 @@ const Search = () => {
 
         <input
           type="text"
-          // value={name}
+          value={name}
           placeholder="Search User"
           onChange={(e) => {
+            setName(e.target.value)
             e.preventDefault();
     dispatch(getAllUser(e.target.value));
           }

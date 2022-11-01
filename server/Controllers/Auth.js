@@ -134,7 +134,7 @@ const forgotPassword = async (req, res) => {
 
     await user.save()
 
-    const resetUrl = `${req.protocol}://localhost:3000/password/reset/${resetPasswordToken}`
+    const resetUrl = `${req.protocol}://starpoint.vercel.app/password/reset/${resetPasswordToken}`
 
     const message = `Reset Your Password by clicking on the link below: \n\n ${resetUrl}`
 
