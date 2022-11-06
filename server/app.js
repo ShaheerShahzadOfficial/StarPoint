@@ -8,12 +8,12 @@ const UserRoute = require('./Routes/user');
 const postRoute = require('./Routes/post');
 const app = express()
 
-app.use(
-    cors({
-        origin: true,
-        credentials: true,
-    })
-)
+
+app.use(cors({
+    origin: true,
+    credentials: true,
+
+}));
 
 app.use(bodyParser.json({ limit: '100mb' }));
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));

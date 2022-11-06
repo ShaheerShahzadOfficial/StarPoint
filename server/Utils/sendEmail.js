@@ -5,7 +5,7 @@ const sendEmail = async (options) => {
         service: "gmail",
         auth: {
             user: "mshaheer861@gmail.com",
-            pass: "lbfhozdzavrlubbl"
+            pass: "uwxcdzvxwucgysda"
         }
     });
 
@@ -25,7 +25,7 @@ const sendEmail = async (options) => {
     
 
     const mailOption = {
-        from:"mshaheer861@gmail.com",
+        from:process.env.SMPT_MAIL,
         to: options.email,
         subject: options.subject,
         text: options.message

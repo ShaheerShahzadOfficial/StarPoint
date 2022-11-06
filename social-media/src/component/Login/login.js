@@ -27,7 +27,11 @@ const navigate = useNavigate()
 
 
 const loginUser = () => {
-  dispatch(LoginUser(email,password))
+  if (email !== '' && password !== '') {
+    dispatch(LoginUser(email,password))
+  } else {
+    swal({text:'Email And Password are Required', icon:'error'})
+  }
 }
 
   return (

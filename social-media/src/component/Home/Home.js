@@ -65,7 +65,11 @@ const Home = () => {
   }
 
   const sharePost = () => {
-    dispatch(CreatePost(caption, avatar, Filetype))
+    if (caption !== "" && avatar!=="") {
+      dispatch(CreatePost(caption, avatar))
+    } else {
+      swal("Caption And Picture Are Required")
+    }
   }
 
 

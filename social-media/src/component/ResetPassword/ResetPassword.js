@@ -37,7 +37,7 @@ const ResetPassword = () => {
       }, [dispatch, error, isUpdated?.message])
       
     
-      const resetPassword = ()=>{
+      const resetPassword = () => { 
         if(newPassword !== "" && confirmPassword !== ""){
         if (newPassword === confirmPassword) {
           dispatch(ResetPasswordUser(token, newPassword,confirmPassword))

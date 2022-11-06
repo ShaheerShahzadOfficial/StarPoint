@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { UpdateUsersPassword } from "../../Redux/Actions/User"
+import swal from "sweetalert"
 
 const UpdatePassword = () => {
   const [oldPassword, setOldPassword] = useState("")
@@ -23,7 +24,17 @@ const UpdatePassword = () => {
   
   }, [isAuthenticated, loading, navigate])
 
-
+const changePassword = () =>{
+  if (oldPassword !== "" && newPassword !=="") {
+    if (oldPassword !== newPassword) {
+      dispatch(UpdateUsersPassword(oldPassword, newPassword))
+    } else {
+      swal({text:"OldPassword and NewPassword can't be same",icon:"error"})
+    }
+  } else {
+    swal({text:"OldPassword and NewPassword are Required",icon:"error"})
+  }
+}
   return (
 <div className="updatePassword">
   {
@@ -34,7 +45,7 @@ const UpdatePassword = () => {
         <input placeholder="Old Password" value={oldPassword}   onChange={(e)=>setOldPassword(e.target.value)}  type={"password"} />
         <input placeholder="New Password" value={newPassword}  onChange={(e)=>setNewPassword(e.target.value)} type={"password"}/>
     
-            <Button onClick={()=>{dispatch(UpdateUsersPassword(oldPassword, newPassword))}}>Change Password</Button>
+            <Button onClick={changePassword}>Change Password</Button>
        
     </div>
   }
